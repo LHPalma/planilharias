@@ -7,16 +7,22 @@ namespace Planilharias.Infrastructure.Repositories;
 public class BaseRepository<T>(PlanilhariasDbContext db) : IBaseRepository<T>
     where T : class
 {
-    public Task<List<T>> GetAllAsync() =>
-        db.Set<T>().ToListAsync();
+    public Task<List<T>> GetAllAsync()
+    {
+        return db.Set<T>().ToListAsync();
+    }
 
 
-    public Task<T?> FindByIdAsync(Guid id) =>
-        db.Set<T>().FindAsync(id).AsTask();
+    public Task<T?> FindByIdAsync(Guid id)
+    {
+        return db.Set<T>().FindAsync(id).AsTask();
+    }
 
 
-    public async Task<T> GetByIdAsync(Guid id) =>
-        await db.Set<T>().FindAsync(id) ?? throw new KeyNotFoundException($"{typeof(T).Name} {id} not found");
+    public async Task<T> GetByIdAsync(Guid id)
+    {
+        return await db.Set<T>().FindAsync(id) ?? throw new KeyNotFoundException($"{typeof(T).Name} {id} not found");
+    }
 
 
     public async Task<T> AddAsync(T entity)

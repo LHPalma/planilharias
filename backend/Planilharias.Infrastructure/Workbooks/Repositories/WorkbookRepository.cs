@@ -6,6 +6,6 @@ using Planilharias.Infrastructure.Repositories;
 namespace Planilharias.Infrastructure.Workbooks.Repositories;
 
 public class WorkbookRepository(PlanilhariasDbContext db)
-    : BaseRepository<Workbook>(db), IWorkbookBaseRepository
+    : BaseRepository<Workbook>(db), IWorkbookRepository
 {
 }

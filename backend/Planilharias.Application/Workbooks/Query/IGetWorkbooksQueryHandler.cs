@@ -2,7 +2,7 @@
 
 namespace Planilharias.Application.Workbooks;
 
-public record GetWorkbooksQuery();
+public record GetWorkbooksQuery;
 
 public interface IGetWorkbooksQueryHandler
 {

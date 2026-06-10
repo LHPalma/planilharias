@@ -4,8 +4,10 @@ using Planilharias.Domain.Workbooks.Repositories;
 
 namespace Planilharias.Infrastructure.Workbooks.Query;
 
-public class GetWorkbooksQueryHandler(IWorkbookBaseRepository repository) : IGetWorkbooksQueryHandler
+public class GetWorkbooksQueryHandler(IWorkbookRepository repository) : IGetWorkbooksQueryHandler
 {
-    public Task<List<Workbook>> HandleAsync(GetWorkbooksQuery query) =>
-        repository.GetAllAsync();
+    public Task<List<Workbook>> HandleAsync(GetWorkbooksQuery query)
+    {
+        return repository.GetAllAsync();
+    }
 }
