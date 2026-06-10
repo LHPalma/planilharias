@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Planilharias.Api/Planilharias.Api.csproj" />
+  <Project Path="Planilharias.Application/Planilharias.Application.csproj" />
+  <Project Path="Planilharias.Domain/Planilharias.Domain.csproj" />
+  <Project Path="Planilharias.Infrastructure/Planilharias.Infrastructure.csproj" />
+</Solution>
