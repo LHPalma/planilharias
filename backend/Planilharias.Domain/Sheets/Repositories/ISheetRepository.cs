@@ -5,4 +5,5 @@ namespace Planilharias.Domain.Sheets.Repositories;
 
 public interface ISheetRepository : IBaseRepository<Sheet>
 {
+    Task<List<Sheet>> FindByWorkbookIdAsync(Guid workbookId);
 }

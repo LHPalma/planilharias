@@ -6,6 +6,9 @@
 # dotenv files
 .env
 
+# Graphify
+graphify-out/
+
 # User-specific files
 *.rsuser
 *.suo

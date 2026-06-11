@@ -1,4 +1,5 @@
 [*.cs]
+resharper_place_attribute_on_same_line = false
 dotnet_diagnostic.SA1649.severity = error
 dotnet_diagnostic.SA1000.severity = none
 dotnet_diagnostic.SA1600.severity = none

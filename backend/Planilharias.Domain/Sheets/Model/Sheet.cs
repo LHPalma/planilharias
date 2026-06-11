@@ -12,7 +12,10 @@ public class Sheet
 
     public int Position { get; set; }
 
-    [Column(TypeName = "jsonb")] public Dictionary<string, string> Cells { get; set; } = new();
+    [Column(TypeName = "jsonb")]
+    public Dictionary<string, string> Cells { get; set; } = new();
+
+    public Guid WorkbookId { get; set; }
 
     public Workbook Workbook { get; set; } = null!;
 }

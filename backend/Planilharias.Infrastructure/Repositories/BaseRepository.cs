@@ -7,6 +7,8 @@ namespace Planilharias.Infrastructure.Repositories;
 public class BaseRepository<T>(PlanilhariasDbContext db) : IBaseRepository<T>
     where T : class
 {
+    protected readonly PlanilhariasDbContext Db = db;
+
     public Task<List<T>> GetAllAsync()
     {
         return db.Set<T>().ToListAsync();

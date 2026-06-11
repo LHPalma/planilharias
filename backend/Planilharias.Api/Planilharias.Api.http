@@ -1,6 +1,6 @@
 @Planilharias.Api_HostAddress = http://localhost:5281
 
-GET {{Planilharias.Api_HostAddress}}/weatherforecast/
+GET {{Planilharias.Api_HostAddress}}/workbooks
 Accept: application/json
 
 ###

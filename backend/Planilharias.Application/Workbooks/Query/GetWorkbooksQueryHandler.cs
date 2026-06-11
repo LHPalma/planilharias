@@ -1,8 +1,7 @@
-﻿using Planilharias.Application.Workbooks;
-using Planilharias.Domain.Workbooks.Model;
+﻿using Planilharias.Domain.Workbooks.Model;
 using Planilharias.Domain.Workbooks.Repositories;
 
-namespace Planilharias.Infrastructure.Workbooks.Query;
+namespace Planilharias.Application.Workbooks.Query;
 
 public class GetWorkbooksQueryHandler(IWorkbookRepository repository) : IGetWorkbooksQueryHandler
 {
