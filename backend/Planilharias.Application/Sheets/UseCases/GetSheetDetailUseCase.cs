@@ -1,5 +1,5 @@
 ﻿using Planilharias.Application.Sheets.DTOs.Response;
-using Planilharias.Application.Sheets.Mapper;
+using Planilharias.Application.Sheets.Mappers;
 using Planilharias.Application.Sheets.Query;
 
 namespace Planilharias.Application.Sheets.UseCases;

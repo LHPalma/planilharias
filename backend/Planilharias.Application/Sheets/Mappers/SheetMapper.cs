@@ -2,7 +2,7 @@
 using Planilharias.Domain.Sheets.Model;
 using Riok.Mapperly.Abstractions;
 
-namespace Planilharias.Application.Sheets.Mapper;
+namespace Planilharias.Application.Sheets.Mappers;
 
 [Mapper(RequiredMappingStrategy = RequiredMappingStrategy.None)]
 public partial class SheetMapper
