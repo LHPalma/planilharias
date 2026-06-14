@@ -1,5 +1,4 @@
 [*.cs]
-resharper_place_attribute_on_same_line = false
 dotnet_diagnostic.SA1649.severity = error
 dotnet_diagnostic.SA1000.severity = none
 dotnet_diagnostic.SA1600.severity = none
@@ -7,3 +6,14 @@ dotnet_diagnostic.SA1649.severity = error
 dotnet_diagnostic.SA1200.severity = none
 dotnet_diagnostic.SA1010.severity = none
 dotnet_diagnostic.SA1633.severity = none
+
+csharp_prefer_braces = true:warning
+
+resharper_place_attribute_on_same_line = false
+resharper_braces_for_ifelse = required
+resharper_braces_for_for = required
+resharper_braces_for_foreach = required
+resharper_braces_for_while = required
+resharper_braces_for_using = required
+resharper_braces_for_lock = required
+resharper_csharp_trailing_comma_in_multiline_lists = true
