@@ -13,4 +13,14 @@ public class WorkbookTests
     {
         Assert.Throws<InvalidWorkbookNameException>(() => Workbook.Create(invalidName!));
     }
+
+    [Fact(DisplayName = "Aplica Trim no nome do workbook")]
+    public void Create_WithSurroundingWhitespace_TrimsName()
+    {
+        // Act
+        var workbook = Workbook.Create("  Nome com espaços em volta  ");
+        
+        // Assert
+        Assert.Equal("Nome com espaços em volta", workbook.Name);
+    }
 }

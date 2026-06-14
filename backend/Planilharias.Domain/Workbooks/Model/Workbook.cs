@@ -29,6 +29,8 @@ public class Workbook
             throw new InvalidWorkbookNameException();
         }
 
+        name = name.Trim();
+
         return new Workbook
         {
             Id = Guid.NewGuid(),
