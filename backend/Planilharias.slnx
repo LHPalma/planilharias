@@ -3,4 +3,5 @@
     <Project Path="Planilharias.Application/Planilharias.Application.csproj"/>
     <Project Path="Planilharias.Domain/Planilharias.Domain.csproj"/>
     <Project Path="Planilharias.Infrastructure/Planilharias.Infrastructure.csproj"/>
+    <Project Path="Planilharias.Tests/Planilharias.Tests.csproj"/>
 </Solution>
