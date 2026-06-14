@@ -9,7 +9,7 @@ public class WorkbookTests
     [InlineData(null)]
     [InlineData("")]
     [InlineData("   ")]
-    public void Create_WithInvalidName_ThrowsArgumentException(string? invalidName)
+    public void Create_WithInvalidName_InvalidWorkbookNameException(string? invalidName)
     {
         Assert.Throws<InvalidWorkbookNameException>(() => Workbook.Create(invalidName!));
     }
@@ -19,8 +19,31 @@ public class WorkbookTests
     {
         // Act
         var workbook = Workbook.Create("  Nome com espaços em volta  ");
-        
+
         // Assert
         Assert.Equal("Nome com espaços em volta", workbook.Name);
+    }
+
+    [Fact(DisplayName = "Cria workbook com nome exatamente no limite")]
+    public void Create_WithNameAtMaxLength_Succeeds()
+    {
+        // Arrange
+        var atLimit = new string('A', Workbook.NameMaxLength);
+
+        // Act
+        var workbook = Workbook.Create(atLimit);
+
+        // Assert
+        Assert.Equal(atLimit, workbook.Name);
+    }
+
+    [Fact(DisplayName = "Não cria workbook com nome maior que o limite")]
+    public void Create_WithNameExceedingMaxLength_WorkbookNameTooLongException()
+    {
+        // Arrange
+        var tooLong = new string('A', Workbook.NameMaxLength + 1);
+
+        // Assert
+        Assert.Throws<WorkbookNameTooLongException>(() => Workbook.Create(tooLong));
     }
 }

@@ -7,6 +7,8 @@ namespace Planilharias.Domain.Workbooks.Model;
 [Table("workbooks")]
 public class Workbook
 {
+    public const int NameMaxLength = 100;
+
     private Workbook()
     {
     }
@@ -24,12 +26,8 @@ public class Workbook
 
     public static Workbook Create(string name)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new InvalidWorkbookNameException();
-        }
-
-        name = name.Trim();
+        name = NormalizeName(name);
+        ValidateName(name);
 
         return new Workbook
         {
@@ -38,5 +36,23 @@ public class Workbook
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow,
         };
+    }
+
+    private static string NormalizeName(string name)
+    {
+        return name?.Trim() ?? string.Empty;
+    }
+
+    private static void ValidateName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new InvalidWorkbookNameException();
+        }
+
+        if (name.Length > NameMaxLength)
+        {
+            throw new WorkbookNameTooLongException(NameMaxLength);
+        }
     }
 }
