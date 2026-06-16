@@ -1,4 +1,4 @@
-﻿namespace Planilharias.Application.Workbooks.DTOs.Response;
+﻿namespace Planilharias.Application.Workbooks.DTOs.Responses;
 
 public record WorkbookResponse(
     Guid Id,

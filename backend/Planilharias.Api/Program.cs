@@ -4,6 +4,7 @@ using Planilharias.Application.Sheets.Mappers;
 using Planilharias.Application.Sheets.Query;
 using Planilharias.Application.Sheets.UseCases;
 using Planilharias.Application.Workbooks;
+using Planilharias.Application.Workbooks.Command;
 using Planilharias.Application.Workbooks.Mappers;
 using Planilharias.Application.Workbooks.Query;
 using Planilharias.Application.Workbooks.UseCases;
@@ -15,14 +16,15 @@ using Planilharias.Infrastructure.Workbooks.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region Services
+
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
-#region Services
-
-builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddApplication();
+builder.Services
+    .AddInfrastructure(builder.Configuration)
+    .AddApplication();
 
 #endregion
 
@@ -42,43 +44,61 @@ app.Run();
 
 internal static class ServiceRegistration
 {
-    public static IServiceCollection AddInfrastructure(
-        this IServiceCollection services, IConfiguration configuration)
+    extension(IServiceCollection services)
     {
-        var dataSource = new NpgsqlDataSourceBuilder(configuration.GetConnectionString("Default"))
-            .EnableDynamicJson()
-            .Build();
+        public IServiceCollection AddInfrastructure(IConfiguration configuration)
+        {
+            var dataSource = new NpgsqlDataSourceBuilder(configuration.GetConnectionString("Default"))
+                .EnableDynamicJson()
+                .Build();
 
-        services.AddDbContext<PlanilhariasDbContext>(options =>
-            options.UseNpgsql(dataSource)
-                .UseSnakeCaseNamingConvention());
+            services.AddDbContext<PlanilhariasDbContext>(options =>
+                options.UseNpgsql(dataSource)
+                    .UseSnakeCaseNamingConvention());
 
-        services.AddScoped<IWorkbookRepository, WorkbookRepository>();
-        services.AddScoped<ISheetRepository, SheetRepository>();
+            services.AddScoped<IWorkbookRepository, WorkbookRepository>();
+            services.AddScoped<ISheetRepository, SheetRepository>();
 
-        return services;
-    }
+            return services;
+        }
 
-    public static IServiceCollection AddApplication(this IServiceCollection services)
-    {
-        #region Workbooks
+        public IServiceCollection AddApplication()
+        {
+            #region Workbooks
 
-        services.AddScoped<IGetWorkbooksUseCase, GetWorkbooksUseCase>();
-        services.AddScoped<IGetWorkbooksQueryHandler, GetWorkbooksQueryHandler>();
-        services.AddScoped<WorkbookMapper>();
+            // UseCases
+            services.AddScoped<IGetWorkbookByIdUseCase, GetWorkbookByIdUseCase>();
+            services.AddScoped<IGetWorkbooksUseCase, GetWorkbooksUseCase>();
+            services.AddScoped<ICreateWorkbookUseCase, CreateWorkbookUseCase>();
 
-        #endregion
+            // Commands
+            services.AddScoped<ICreateWorkbookCommandHandler, CreateWorkbookCommandHandler>();
 
-        #region Sheets
+            // Queries
+            services.AddScoped<IGetWorkbookByIdQueryHandler, GetWorkbookByIdQueryHandler>();
+            services.AddScoped<IGetWorkbooksQueryHandler, GetWorkbooksQueryHandler>();
 
-        services.AddScoped<IGetSheetsByWorkbookUseCase, GetSheetsByWorkbookUseCase>();
-        services.AddScoped<IGetSheetDetailUseCase, GetSheetDetailUseCase>();
-        services.AddScoped<IGetSheetsQueryHandler, GetSheetsQueryHandler>();
-        services.AddScoped<IGetSheetQueryHandler, GetSheetQueryHandler>();
-        services.AddScoped<SheetMapper>();
+            // Mappers
+            services.AddScoped<WorkbookMapper>();
 
-        #endregion
+            #endregion
 
-        return services;
+            #region Sheets
+
+            // UseCases
+            services.AddScoped<IGetSheetsByWorkbookUseCase, GetSheetsByWorkbookUseCase>();
+            services.AddScoped<IGetSheetDetailUseCase, GetSheetDetailUseCase>();
+
+            // Queries
+            services.AddScoped<IGetSheetsQueryHandler, GetSheetsQueryHandler>();
+            services.AddScoped<IGetSheetQueryHandler, GetSheetQueryHandler>();
+
+            // Mappers
+            services.AddScoped<SheetMapper>();
+
+            #endregion
+
+            return services;
+        }
     }
 }

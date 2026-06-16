@@ -2,7 +2,7 @@
 
 namespace Planilharias.Application.Workbooks.UseCases;
 
-public interface IGetWorkbooksUseCase
+public interface IGetWorkbookByIdUseCase
 {
-    Task<List<WorkbookResponse>> ExecuteAsync();
+    Task<WorkbookResponse> ExecuteAsync(Guid id);
 }

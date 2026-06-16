@@ -1,4 +1,4 @@
-﻿using Planilharias.Application.Workbooks.DTOs.Response;
+﻿using Planilharias.Application.Workbooks.DTOs.Responses;
 using Planilharias.Domain.Workbooks.Model;
 using Riok.Mapperly.Abstractions;
 
