@@ -20,6 +20,11 @@
     </ItemGroup>
 
     <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Planilharias.Api\Planilharias.Api.csproj"/>
         <ProjectReference Include="..\Planilharias.Application\Planilharias.Application.csproj"/>
         <ProjectReference Include="..\Planilharias.Domain\Planilharias.Domain.csproj"/>
         <ProjectReference Include="..\Planilharias.Infrastructure\Planilharias.Infrastructure.csproj"/>
