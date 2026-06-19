@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using Planilharias.Api.ExceptionHandling;
 using Planilharias.Application.Sheets.Mappers;
 using Planilharias.Application.Sheets.Query;
 using Planilharias.Application.Sheets.UseCases;
@@ -22,6 +23,9 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddExceptionHandler<DomainExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddApplication();
@@ -30,6 +34,8 @@ builder.Services
 
 
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
