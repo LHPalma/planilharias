@@ -40,4 +40,34 @@ public class DomainExceptionHandlerTests
         var body = await reader.ReadToEndAsync();
         Assert.Contains("workbook.name.tooLong", body);
     }
+
+    [Fact(DisplayName = "Mapeia recurso não encontrado para 404")]
+    public async Task TryHandleAsync_WithKeyNotFound_SetsNotFound()
+    {
+        // Arrange
+        var context = new DefaultHttpContext();
+        var exception = new KeyNotFoundException();
+
+        // Act
+        var handled = await _handler.TryHandleAsync(context, exception, CancellationToken.None);
+
+        // Assert
+        Assert.True(handled);
+        Assert.Equal(StatusCodes.Status404NotFound, context.Response.StatusCode);
+    }
+
+    [Fact(DisplayName = "Não trata exceção desconhecida e repassa adiante")]
+    public async Task TryHandleAsync_WithUnknownException_ReturnsFalse()
+    {
+        // Arrange
+        var context = new DefaultHttpContext();
+        var exception = new InvalidOperationException();
+
+        // Act
+        var handled = await _handler.TryHandleAsync(context, exception, CancellationToken.None);
+
+        // Assert
+        Assert.False(handled);
+        Assert.Equal(StatusCodes.Status200OK, context.Response.StatusCode);
+    }
 }

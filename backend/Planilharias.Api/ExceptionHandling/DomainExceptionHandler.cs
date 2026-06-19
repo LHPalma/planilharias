@@ -10,20 +10,20 @@ public sealed class DomainExceptionHandler : IExceptionHandler
         Exception exception,
         CancellationToken cancellationToken)
     {
-        if (exception is not BaseDomainException baseDomainException)
+        var (statusCode, code, message) = exception switch
+        {
+            BaseDomainException domain => (StatusCodes.Status400BadRequest, domain.Code, domain.Message),
+            KeyNotFoundException => (StatusCodes.Status404NotFound, "resource.notFound", "Resource not found."),
+            _ => (0, null, null),
+        };
+
+        if (code is null)
         {
             return false;
         }
 
-        httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-        
-        await httpContext.Response.WriteAsJsonAsync(
-            new
-            {
-                code = baseDomainException.Code,
-                message = baseDomainException.Message,
-            }, cancellationToken
-        );
+        httpContext.Response.StatusCode = statusCode;
+        await httpContext.Response.WriteAsJsonAsync(new { code, message }, cancellationToken);
 
         return true;
     }
