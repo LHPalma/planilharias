@@ -5,20 +5,26 @@ namespace Planilharias.Api.ExceptionHandling;
 
 public sealed class DomainExceptionHandler : IExceptionHandler
 {
-    public ValueTask<bool> TryHandleAsync(
+    public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,
         Exception exception,
-        CancellationToken cancellationToken
-    )
+        CancellationToken cancellationToken)
     {
-        if (exception is not BaseDomainException)
+        if (exception is not BaseDomainException baseDomainException)
         {
-            return ValueTask.FromResult(false);
+            return false;
         }
 
-        httpContext
-            .Response
-            .StatusCode = StatusCodes.Status400BadRequest;
-        return ValueTask.FromResult(true);
+        httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+        
+        await httpContext.Response.WriteAsJsonAsync(
+            new
+            {
+                code = baseDomainException.Code,
+                message = baseDomainException.Message,
+            }, cancellationToken
+        );
+
+        return true;
     }
 }
