@@ -17,3 +17,4 @@ resharper_braces_for_while = required
 resharper_braces_for_using = required
 resharper_braces_for_lock = required
 resharper_csharp_trailing_comma_in_multiline_lists = true
+resharper_int_align_switch_expressions = true

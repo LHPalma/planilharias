@@ -13,8 +13,8 @@ public sealed class DomainExceptionHandler : IExceptionHandler
         var (statusCode, code, message) = exception switch
         {
             BaseDomainException domain => (StatusCodes.Status400BadRequest, domain.Code, domain.Message),
-            KeyNotFoundException => (StatusCodes.Status404NotFound, "resource.notFound", "Resource not found."),
-            _ => (0, null, null),
+            KeyNotFoundException       => (StatusCodes.Status404NotFound, "resource.notFound", "Resource not found."),
+            _                          => (0, null, null),
         };
 
         if (code is null)
