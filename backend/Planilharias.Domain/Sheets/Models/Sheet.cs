@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Planilharias.Domain.Sheets.Exceptions;
-using Planilharias.Domain.Workbooks.Model;
+using Planilharias.Domain.Workbooks.Models;
 
-namespace Planilharias.Domain.Sheets.Model;
+namespace Planilharias.Domain.Sheets.Models;
 
 [Table("sheets")]
 public class Sheet

@@ -1,7 +1,7 @@
-﻿using Planilharias.Domain.Sheets.Model;
+﻿using Planilharias.Domain.Sheets.Models;
 using Planilharias.Domain.Sheets.Repositories;
 
-namespace Planilharias.Application.Sheets.Query;
+namespace Planilharias.Application.Sheets.Queries;
 
 public class GetSheetsQueryHandler(ISheetRepository repository)
     : IGetSheetsQueryHandler

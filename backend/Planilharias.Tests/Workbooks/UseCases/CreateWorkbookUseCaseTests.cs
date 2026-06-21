@@ -1,9 +1,9 @@
 ﻿using NSubstitute;
-using Planilharias.Application.Workbooks.Command;
+using Planilharias.Application.Workbooks.Commands;
 using Planilharias.Application.Workbooks.DTOs.Requests;
 using Planilharias.Application.Workbooks.Mappers;
 using Planilharias.Application.Workbooks.UseCases;
-using Planilharias.Domain.Workbooks.Model;
+using Planilharias.Domain.Workbooks.Models;
 
 namespace Planilharias.Tests.Workbooks.UseCases;
 

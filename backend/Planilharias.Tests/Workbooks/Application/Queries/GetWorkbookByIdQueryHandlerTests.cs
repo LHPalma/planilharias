@@ -1,9 +1,9 @@
 using NSubstitute;
-using Planilharias.Application.Workbooks.Query;
-using Planilharias.Domain.Workbooks.Model;
+using Planilharias.Application.Workbooks.Queries;
+using Planilharias.Domain.Workbooks.Models;
 using Planilharias.Domain.Workbooks.Repositories;
 
-namespace Planilharias.Tests.Workbooks.Application.Query;
+namespace Planilharias.Tests.Workbooks.Application.Queries;
 
 public class GetWorkbookByIdQueryHandlerTests
 {

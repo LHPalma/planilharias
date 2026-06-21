@@ -1,5 +1,5 @@
 ﻿using Planilharias.Application.Workbooks.DTOs.Responses;
-using Planilharias.Domain.Workbooks.Model;
+using Planilharias.Domain.Workbooks.Models;
 using Riok.Mapperly.Abstractions;
 
 namespace Planilharias.Application.Workbooks.Mappers;

@@ -1,4 +1,4 @@
-﻿using Planilharias.Application.Workbooks.Command;
+﻿using Planilharias.Application.Workbooks.Commands;
 using Planilharias.Application.Workbooks.DTOs.Requests;
 using Planilharias.Application.Workbooks.DTOs.Responses;
 using Planilharias.Application.Workbooks.Mappers;

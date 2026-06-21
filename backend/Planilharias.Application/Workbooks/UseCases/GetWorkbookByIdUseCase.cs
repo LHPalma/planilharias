@@ -1,6 +1,6 @@
 ﻿using Planilharias.Application.Workbooks.DTOs.Responses;
 using Planilharias.Application.Workbooks.Mappers;
-using Planilharias.Application.Workbooks.Query;
+using Planilharias.Application.Workbooks.Queries;
 
 namespace Planilharias.Application.Workbooks.UseCases;
 

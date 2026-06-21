@@ -1,6 +1,6 @@
-﻿using Planilharias.Domain.Sheets.Model;
+﻿using Planilharias.Domain.Sheets.Models;
 
-namespace Planilharias.Application.Sheets.Query;
+namespace Planilharias.Application.Sheets.Queries;
 
 public interface IGetSheetsQueryHandler
 {

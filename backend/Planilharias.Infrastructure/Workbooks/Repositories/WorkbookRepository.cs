@@ -1,4 +1,4 @@
-﻿using Planilharias.Domain.Workbooks.Model;
+﻿using Planilharias.Domain.Workbooks.Models;
 using Planilharias.Domain.Workbooks.Repositories;
 using Planilharias.Infrastructure.Data;
 using Planilharias.Infrastructure.Repositories;

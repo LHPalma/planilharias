@@ -1,9 +1,9 @@
 ﻿using NSubstitute;
-using Planilharias.Application.Workbooks.Command;
-using Planilharias.Domain.Workbooks.Model;
+using Planilharias.Application.Workbooks.Commands;
+using Planilharias.Domain.Workbooks.Models;
 using Planilharias.Domain.Workbooks.Repositories;
 
-namespace Planilharias.Tests.Workbooks.Application.Command;
+namespace Planilharias.Tests.Workbooks.Application.Commands;
 
 public class CreateWorkbookCommandHandlerTests
 {

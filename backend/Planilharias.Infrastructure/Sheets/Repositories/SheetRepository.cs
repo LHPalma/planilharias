@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Planilharias.Domain.Sheets.Model;
+using Planilharias.Domain.Sheets.Models;
 using Planilharias.Domain.Sheets.Repositories;
 using Planilharias.Infrastructure.Data;
 using Planilharias.Infrastructure.Repositories;

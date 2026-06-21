@@ -1,4 +1,4 @@
-﻿namespace Planilharias.Application.Sheets.DTOs.Response;
+﻿namespace Planilharias.Application.Sheets.DTOs.Responses;
 
 public record SheetDetailResponse(
     Guid Id,

@@ -1,7 +1,7 @@
 using Planilharias.Domain.Sheets.Exceptions;
-using Planilharias.Domain.Sheets.Model;
+using Planilharias.Domain.Sheets.Models;
 
-namespace Planilharias.Tests.Sheets.Domain.Model;
+namespace Planilharias.Tests.Sheets.Domain.Models;
 
 public class SheetTests
 {

@@ -1,3 +1,3 @@
-﻿namespace Planilharias.Application.Sheets.Query;
+﻿namespace Planilharias.Application.Sheets.Queries;
 
 public record GetSheetsByWorkbookQuery(Guid WorkbookId);

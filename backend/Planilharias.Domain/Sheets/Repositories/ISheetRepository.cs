@@ -1,5 +1,5 @@
 ﻿using Planilharias.Domain.Repositories;
-using Planilharias.Domain.Sheets.Model;
+using Planilharias.Domain.Sheets.Models;
 
 namespace Planilharias.Domain.Sheets.Repositories;
 

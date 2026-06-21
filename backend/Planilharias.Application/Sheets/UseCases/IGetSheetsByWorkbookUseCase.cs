@@ -1,4 +1,4 @@
-﻿using Planilharias.Application.Sheets.DTOs.Response;
+﻿using Planilharias.Application.Sheets.DTOs.Responses;
 
 namespace Planilharias.Application.Sheets.UseCases;
 

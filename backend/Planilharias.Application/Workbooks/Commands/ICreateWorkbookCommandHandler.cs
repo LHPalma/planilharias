@@ -1,6 +1,6 @@
-﻿using Planilharias.Domain.Workbooks.Model;
+﻿using Planilharias.Domain.Workbooks.Models;
 
-namespace Planilharias.Application.Workbooks.Command;
+namespace Planilharias.Application.Workbooks.Commands;
 
 public interface ICreateWorkbookCommandHandler
 {

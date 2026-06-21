@@ -1,7 +1,7 @@
 ﻿using Planilharias.Domain.Workbooks.Exceptions;
-using Planilharias.Domain.Workbooks.Model;
+using Planilharias.Domain.Workbooks.Models;
 
-namespace Planilharias.Tests.Workbooks.Domain.Model;
+namespace Planilharias.Tests.Workbooks.Domain.Models;
 
 public class WorkbookTests
 {

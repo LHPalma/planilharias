@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Planilharias.Domain.Sheets.Model;
-using Planilharias.Domain.Workbooks.Model;
+using Planilharias.Domain.Sheets.Models;
+using Planilharias.Domain.Workbooks.Models;
 
 namespace Planilharias.Infrastructure.Data;
 
