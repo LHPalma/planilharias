@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Planilharias.Domain.Repositories;
+using Planilharias.Domain.Specifications;
 using Planilharias.Infrastructure.Data;
+using Planilharias.Infrastructure.Specifications;
 
 namespace Planilharias.Infrastructure.Repositories;
 
@@ -19,7 +21,6 @@ public class BaseRepository<T>(PlanilhariasDbContext db) : IBaseRepository<T>
     {
         return db.Set<T>().FindAsync(id).AsTask();
     }
-
 
     public async Task<T> GetByIdAsync(Guid id)
     {
@@ -48,5 +49,10 @@ public class BaseRepository<T>(PlanilhariasDbContext db) : IBaseRepository<T>
         var entity = await GetByIdAsync(id);
         db.Set<T>().Remove(entity);
         await db.SaveChangesAsync();
+    }
+
+    public Task<T?> FirstOrDefaultAsync(ISpecification<T> spec)
+    {
+        return SpecificationEvaluator.Apply(db.Set<T>(), spec).FirstOrDefaultAsync();
     }
 }

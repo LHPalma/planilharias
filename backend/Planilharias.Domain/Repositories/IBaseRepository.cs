@@ -1,4 +1,6 @@
-﻿namespace Planilharias.Domain.Repositories;
+﻿using Planilharias.Domain.Specifications;
+
+namespace Planilharias.Domain.Repositories;
 
 public interface IBaseRepository<T>
     where T : class
@@ -14,4 +16,6 @@ public interface IBaseRepository<T>
     Task<T> UpdateAsync(T entity);
 
     Task DeleteAsync(Guid id);
+
+    Task<T?> FirstOrDefaultAsync(ISpecification<T> spec);
 }
