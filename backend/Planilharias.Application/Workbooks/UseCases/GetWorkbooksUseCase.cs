@@ -6,7 +6,7 @@ using Planilharias.Domain.Workbooks.Models;
 
 namespace Planilharias.Application.Workbooks.UseCases;
 
-public class GetWorkbooksUseCase(
+public sealed class GetWorkbooksUseCase(
     IQueryHandler<GetWorkbooksQuery, List<Workbook>> handler,
     WorkbookMapper mapper
 ) : IGetWorkbooksUseCase

@@ -6,7 +6,7 @@ using Planilharias.Domain.Sheets.Models;
 
 namespace Planilharias.Application.Sheets.UseCases;
 
-public class GetSheetDetailUseCase(
+public sealed class GetSheetDetailUseCase(
     IQueryHandler<GetSheetQuery, Sheet> handler,
     SheetMapper mapper
 ) : IGetSheetDetailUseCase

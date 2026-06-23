@@ -7,7 +7,7 @@ using Planilharias.Domain.Workbooks.Models;
 
 namespace Planilharias.Application.Workbooks.UseCases;
 
-public class CreateWorkbookUseCase(
+public sealed class CreateWorkbookUseCase(
     ICommandHandler<CreateWorkbookCommand, Workbook> handler,
     WorkbookMapper mapper
 ) : ICreateWorkbookUseCase

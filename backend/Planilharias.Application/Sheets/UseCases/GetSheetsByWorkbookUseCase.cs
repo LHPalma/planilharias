@@ -6,7 +6,7 @@ using Planilharias.Domain.Sheets.Models;
 
 namespace Planilharias.Application.Sheets.UseCases;
 
-public class GetSheetsByWorkbookUseCase(
+public sealed class GetSheetsByWorkbookUseCase(
     IQueryHandler<GetSheetsByWorkbookQuery, List<Sheet>> handler,
     SheetMapper mapper
 ) : IGetSheetsByWorkbookUseCase
