@@ -1,11 +1,13 @@
-﻿using Planilharias.Application.Sheets.DTOs.Responses;
+using Planilharias.Application.Abstractions;
+using Planilharias.Application.Sheets.DTOs.Responses;
 using Planilharias.Application.Sheets.Mappers;
 using Planilharias.Application.Sheets.Queries;
+using Planilharias.Domain.Sheets.Models;
 
 namespace Planilharias.Application.Sheets.UseCases;
 
 public class GetSheetDetailUseCase(
-    IGetSheetQueryHandler handler,
+    IQueryHandler<GetSheetQuery, Sheet> handler,
     SheetMapper mapper
 ) : IGetSheetDetailUseCase
 {

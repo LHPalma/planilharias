@@ -1,10 +1,11 @@
-﻿using Planilharias.Domain.Sheets.Models;
+using Planilharias.Application.Abstractions;
+using Planilharias.Domain.Sheets.Models;
 using Planilharias.Domain.Sheets.Repositories;
 
 namespace Planilharias.Application.Sheets.Queries;
 
-public class GetSheetQueryHandler(ISheetRepository repository)
-    : IGetSheetQueryHandler
+public sealed class GetSheetQueryHandler(ISheetRepository repository)
+    : IQueryHandler<GetSheetQuery, Sheet>
 {
     public async Task<Sheet> HandleAsync(GetSheetQuery query)
     {

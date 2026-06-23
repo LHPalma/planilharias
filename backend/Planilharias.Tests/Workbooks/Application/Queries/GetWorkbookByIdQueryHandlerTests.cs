@@ -25,7 +25,7 @@ public class GetWorkbookByIdQueryHandlerTests
         _repository.GetByIdAsync(id).Returns(workbook);
 
         // Act
-        var result = await _handler.HandleAsync(id);
+        var result = await _handler.HandleAsync(new GetWorkbookByIdQuery(id));
 
         // Assert
         Assert.Same(workbook, result);

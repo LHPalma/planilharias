@@ -1,15 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using Planilharias.Api.ExceptionHandling;
+using Planilharias.Application.Abstractions;
 using Planilharias.Application.Sheets.Mappers;
 using Planilharias.Application.Sheets.Queries;
 using Planilharias.Application.Sheets.UseCases;
-using Planilharias.Application.Workbooks;
 using Planilharias.Application.Workbooks.Commands;
 using Planilharias.Application.Workbooks.Mappers;
 using Planilharias.Application.Workbooks.Queries;
 using Planilharias.Application.Workbooks.UseCases;
+using Planilharias.Domain.Sheets.Models;
 using Planilharias.Domain.Sheets.Repositories;
+using Planilharias.Domain.Workbooks.Models;
 using Planilharias.Domain.Workbooks.Repositories;
 using Planilharias.Infrastructure.Data;
 using Planilharias.Infrastructure.Sheets.Repositories;
@@ -78,11 +80,11 @@ internal static class ServiceRegistration
             services.AddScoped<ICreateWorkbookUseCase, CreateWorkbookUseCase>();
 
             // Commands
-            services.AddScoped<ICreateWorkbookCommandHandler, CreateWorkbookCommandHandler>();
+            services.AddScoped<ICommandHandler<CreateWorkbookCommand, Workbook>, CreateWorkbookCommandHandler>();
 
             // Queries
-            services.AddScoped<IGetWorkbookByIdQueryHandler, GetWorkbookByIdQueryHandler>();
-            services.AddScoped<IGetWorkbooksQueryHandler, GetWorkbooksQueryHandler>();
+            services.AddScoped<IQueryHandler<GetWorkbookByIdQuery, Workbook>, GetWorkbookByIdQueryHandler>();
+            services.AddScoped<IQueryHandler<GetWorkbooksQuery, List<Workbook>>, GetWorkbooksQueryHandler>();
 
             // Mappers
             services.AddScoped<WorkbookMapper>();
@@ -96,8 +98,8 @@ internal static class ServiceRegistration
             services.AddScoped<IGetSheetDetailUseCase, GetSheetDetailUseCase>();
 
             // Queries
-            services.AddScoped<IGetSheetsQueryHandler, GetSheetsQueryHandler>();
-            services.AddScoped<IGetSheetQueryHandler, GetSheetQueryHandler>();
+            services.AddScoped<IQueryHandler<GetSheetsByWorkbookQuery, List<Sheet>>, GetSheetsQueryHandler>();
+            services.AddScoped<IQueryHandler<GetSheetQuery, Sheet>, GetSheetQueryHandler>();
 
             // Mappers
             services.AddScoped<SheetMapper>();

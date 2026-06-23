@@ -1,17 +1,19 @@
-﻿using Planilharias.Application.Workbooks.DTOs.Responses;
+using Planilharias.Application.Abstractions;
+using Planilharias.Application.Workbooks.DTOs.Responses;
 using Planilharias.Application.Workbooks.Mappers;
 using Planilharias.Application.Workbooks.Queries;
+using Planilharias.Domain.Workbooks.Models;
 
 namespace Planilharias.Application.Workbooks.UseCases;
 
 public class GetWorkbookByIdUseCase(
-    IGetWorkbookByIdQueryHandler handler,
+    IQueryHandler<GetWorkbookByIdQuery, Workbook> handler,
     WorkbookMapper mapper
 ) : IGetWorkbookByIdUseCase
 {
     public async Task<WorkbookResponse> ExecuteAsync(Guid id)
     {
-        var workbook = await handler.HandleAsync(id);
+        var workbook = await handler.HandleAsync(new GetWorkbookByIdQuery(id));
         return mapper.ToResponse(workbook);
     }
 }

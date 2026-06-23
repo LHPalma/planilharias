@@ -1,10 +1,13 @@
-﻿using Planilharias.Application.Workbooks.DTOs.Responses;
+using Planilharias.Application.Abstractions;
+using Planilharias.Application.Workbooks.DTOs.Responses;
 using Planilharias.Application.Workbooks.Mappers;
+using Planilharias.Application.Workbooks.Queries;
+using Planilharias.Domain.Workbooks.Models;
 
 namespace Planilharias.Application.Workbooks.UseCases;
 
 public class GetWorkbooksUseCase(
-    IGetWorkbooksQueryHandler handler,
+    IQueryHandler<GetWorkbooksQuery, List<Workbook>> handler,
     WorkbookMapper mapper
 ) : IGetWorkbooksUseCase
 {

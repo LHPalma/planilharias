@@ -1,4 +1,5 @@
 using NSubstitute;
+using Planilharias.Application.Abstractions;
 using Planilharias.Application.Workbooks.Mappers;
 using Planilharias.Application.Workbooks.Queries;
 using Planilharias.Application.Workbooks.UseCases;
@@ -8,12 +9,12 @@ namespace Planilharias.Tests.Workbooks.UseCases;
 
 public class GetWorkbookByIdUseCaseTests
 {
-    private readonly IGetWorkbookByIdQueryHandler _handler;
+    private readonly IQueryHandler<GetWorkbookByIdQuery, Workbook> _handler;
     private readonly GetWorkbookByIdUseCase _useCase;
 
     public GetWorkbookByIdUseCaseTests()
     {
-        _handler = Substitute.For<IGetWorkbookByIdQueryHandler>();
+        _handler = Substitute.For<IQueryHandler<GetWorkbookByIdQuery, Workbook>>();
         _useCase = new GetWorkbookByIdUseCase(_handler, new WorkbookMapper());
     }
 
@@ -23,7 +24,7 @@ public class GetWorkbookByIdUseCaseTests
         // Arrange
         var id = Guid.NewGuid();
         var workbook = Workbook.Create("Cavalos do Carlinhos");
-        _handler.HandleAsync(id).Returns(workbook);
+        _handler.HandleAsync(Arg.Any<GetWorkbookByIdQuery>()).Returns(workbook);
 
         // Act
         var result = await _useCase.ExecuteAsync(id);
@@ -32,6 +33,6 @@ public class GetWorkbookByIdUseCaseTests
         Assert.Equal(workbook.Id, result.Id);
         Assert.Equal(workbook.Name, result.Name);
         Assert.Equal(workbook.CreatedAt, result.CreatedAt);
-        await _handler.Received(1).HandleAsync(id);
+        await _handler.Received(1).HandleAsync(Arg.Is<GetWorkbookByIdQuery>(q => q.Id == id));
     }
 }

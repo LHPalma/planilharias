@@ -1,14 +1,15 @@
-﻿using Planilharias.Domain.Workbooks.Models;
+using Planilharias.Application.Abstractions;
+using Planilharias.Domain.Workbooks.Models;
 using Planilharias.Domain.Workbooks.Repositories;
 
 namespace Planilharias.Application.Workbooks.Queries;
 
-public class GetWorkbookByIdQueryHandler(
+public sealed class GetWorkbookByIdQueryHandler(
     IWorkbookRepository repository
-) : IGetWorkbookByIdQueryHandler
+) : IQueryHandler<GetWorkbookByIdQuery, Workbook>
 {
-    public Task<Workbook> HandleAsync(Guid id)
+    public Task<Workbook> HandleAsync(GetWorkbookByIdQuery query)
     {
-        return repository.GetByIdAsync(id);
+        return repository.GetByIdAsync(query.Id);
     }
 }

@@ -1,12 +1,14 @@
-﻿using Planilharias.Application.Workbooks.Commands;
+using Planilharias.Application.Abstractions;
+using Planilharias.Application.Workbooks.Commands;
 using Planilharias.Application.Workbooks.DTOs.Requests;
 using Planilharias.Application.Workbooks.DTOs.Responses;
 using Planilharias.Application.Workbooks.Mappers;
+using Planilharias.Domain.Workbooks.Models;
 
 namespace Planilharias.Application.Workbooks.UseCases;
 
 public class CreateWorkbookUseCase(
-    ICreateWorkbookCommandHandler handler,
+    ICommandHandler<CreateWorkbookCommand, Workbook> handler,
     WorkbookMapper mapper
 ) : ICreateWorkbookUseCase
 {

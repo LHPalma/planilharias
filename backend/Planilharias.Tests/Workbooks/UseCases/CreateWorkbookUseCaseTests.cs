@@ -1,4 +1,5 @@
 ﻿using NSubstitute;
+using Planilharias.Application.Abstractions;
 using Planilharias.Application.Workbooks.Commands;
 using Planilharias.Application.Workbooks.DTOs.Requests;
 using Planilharias.Application.Workbooks.Mappers;
@@ -9,12 +10,12 @@ namespace Planilharias.Tests.Workbooks.UseCases;
 
 public class CreateWorkbookUseCaseTests
 {
-    private readonly ICreateWorkbookCommandHandler _handler;
+    private readonly ICommandHandler<CreateWorkbookCommand, Workbook> _handler;
     private readonly CreateWorkbookUseCase _useCaseTests;
 
     public CreateWorkbookUseCaseTests()
     {
-        _handler = Substitute.For<ICreateWorkbookCommandHandler>();
+        _handler = Substitute.For<ICommandHandler<CreateWorkbookCommand, Workbook>>();
         _useCaseTests = new CreateWorkbookUseCase(_handler, new WorkbookMapper());
     }
 
