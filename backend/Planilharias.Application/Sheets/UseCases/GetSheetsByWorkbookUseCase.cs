@@ -11,9 +11,9 @@ public class GetSheetsByWorkbookUseCase(
     SheetMapper mapper
 ) : IGetSheetsByWorkbookUseCase
 {
-    public async Task<List<SheetResponse>> ExecuteAsync(Guid workbookId)
+    public async Task<List<SheetResponse>> ExecuteAsync(Guid workbookId, CancellationToken ct)
     {
-        var sheets = await handler.HandleAsync(new GetSheetsByWorkbookQuery(workbookId));
+        var sheets = await handler.HandleAsync(new GetSheetsByWorkbookQuery(workbookId), ct);
         return sheets.Select(mapper.ToResponse).ToList();
     }
 }

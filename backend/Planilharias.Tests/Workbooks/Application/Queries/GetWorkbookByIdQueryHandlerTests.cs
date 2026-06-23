@@ -22,13 +22,13 @@ public class GetWorkbookByIdQueryHandlerTests
         // Arrange
         var id = Guid.NewGuid();
         var workbook = Workbook.Create("Cavalos do Carlinhos");
-        _repository.GetByIdAsync(id).Returns(workbook);
+        _repository.GetByIdAsync(id, Arg.Any<CancellationToken>()).Returns(workbook);
 
         // Act
-        var result = await _handler.HandleAsync(new GetWorkbookByIdQuery(id));
+        var result = await _handler.HandleAsync(new GetWorkbookByIdQuery(id), CancellationToken.None);
 
         // Assert
         Assert.Same(workbook, result);
-        await _repository.Received(1).GetByIdAsync(id);
+        await _repository.Received(1).GetByIdAsync(id, Arg.Any<CancellationToken>());
     }
 }

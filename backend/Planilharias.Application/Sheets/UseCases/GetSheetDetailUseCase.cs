@@ -11,9 +11,9 @@ public class GetSheetDetailUseCase(
     SheetMapper mapper
 ) : IGetSheetDetailUseCase
 {
-    public async Task<SheetDetailResponse> ExecuteAsync(Guid sheetId)
+    public async Task<SheetDetailResponse> ExecuteAsync(Guid sheetId, CancellationToken ct)
     {
-        var sheet = await handler.HandleAsync(new GetSheetQuery(sheetId));
+        var sheet = await handler.HandleAsync(new GetSheetQuery(sheetId), ct);
         return mapper.ToDetailResponse(sheet);
     }
 }

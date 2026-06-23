@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Planilharias.Domain.Repositories;
 using Planilharias.Domain.Specifications;
 using Planilharias.Infrastructure.Data;
@@ -11,48 +11,48 @@ public class BaseRepository<T>(PlanilhariasDbContext db) : IBaseRepository<T>
 {
     protected readonly PlanilhariasDbContext Db = db;
 
-    public Task<List<T>> GetAllAsync()
+    public Task<List<T>> GetAllAsync(CancellationToken ct)
     {
-        return db.Set<T>().ToListAsync();
+        return db.Set<T>().ToListAsync(ct);
     }
 
 
-    public Task<T?> FindByIdAsync(Guid id)
+    public Task<T?> FindByIdAsync(Guid id, CancellationToken ct)
     {
-        return db.Set<T>().FindAsync(id).AsTask();
+        return db.Set<T>().FindAsync([id], ct).AsTask();
     }
 
-    public async Task<T> GetByIdAsync(Guid id)
+    public async Task<T> GetByIdAsync(Guid id, CancellationToken ct)
     {
-        return await db.Set<T>().FindAsync(id) ?? throw new KeyNotFoundException($"{typeof(T).Name} {id} not found");
+        return await db.Set<T>().FindAsync([id], ct) ?? throw new KeyNotFoundException($"{typeof(T).Name} {id} not found");
     }
 
 
-    public async Task<T> AddAsync(T entity)
+    public async Task<T> AddAsync(T entity, CancellationToken ct)
     {
-        var entry = await db.Set<T>().AddAsync(entity);
-        await db.SaveChangesAsync();
+        var entry = await db.Set<T>().AddAsync(entity, ct);
+        await db.SaveChangesAsync(ct);
         return entry.Entity;
     }
 
 
-    public async Task<T> UpdateAsync(T entity)
+    public async Task<T> UpdateAsync(T entity, CancellationToken ct)
     {
         var entry = db.Set<T>().Update(entity);
-        await db.SaveChangesAsync();
+        await db.SaveChangesAsync(ct);
         return entry.Entity;
     }
 
 
-    public async Task DeleteAsync(Guid id)
+    public async Task DeleteAsync(Guid id, CancellationToken ct)
     {
-        var entity = await GetByIdAsync(id);
+        var entity = await GetByIdAsync(id, ct);
         db.Set<T>().Remove(entity);
-        await db.SaveChangesAsync();
+        await db.SaveChangesAsync(ct);
     }
 
-    public Task<T?> FirstOrDefaultAsync(ISpecification<T> spec)
+    public Task<T?> FirstOrDefaultAsync(ISpecification<T> spec, CancellationToken ct)
     {
-        return SpecificationEvaluator.Apply(db.Set<T>(), spec).FirstOrDefaultAsync();
+        return SpecificationEvaluator.Apply(db.Set<T>(), spec).FirstOrDefaultAsync(ct);
     }
 }

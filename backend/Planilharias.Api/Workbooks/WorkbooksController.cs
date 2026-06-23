@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Planilharias.Application.Workbooks.DTOs.Requests;
 using Planilharias.Application.Workbooks.UseCases;
 
@@ -15,16 +15,16 @@ public class WorkbooksController(
     #region GET
 
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
     {
-        return Ok(await getWorkbookByIdUseCase.ExecuteAsync(id));
+        return Ok(await getWorkbookByIdUseCase.ExecuteAsync(id, ct));
     }
 
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(CancellationToken ct)
     {
-        return Ok(await getWorkbooksUseCase.ExecuteAsync());
+        return Ok(await getWorkbooksUseCase.ExecuteAsync(ct));
     }
 
     #endregion
@@ -32,9 +32,9 @@ public class WorkbooksController(
     #region POST
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateWorkbookRequest request)
+    public async Task<IActionResult> Create([FromBody] CreateWorkbookRequest request, CancellationToken ct)
     {
-        var workbook = await createWorkbookUseCase.ExecuteAsync(request);
+        var workbook = await createWorkbookUseCase.ExecuteAsync(request, ct);
         return CreatedAtAction(
             nameof(GetById),
             new { id = workbook.Id },

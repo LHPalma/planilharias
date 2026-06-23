@@ -7,8 +7,8 @@ namespace Planilharias.Application.Workbooks.Queries;
 public sealed class GetWorkbooksQueryHandler(IWorkbookRepository repository)
     : IQueryHandler<GetWorkbooksQuery, List<Workbook>>
 {
-    public Task<List<Workbook>> HandleAsync(GetWorkbooksQuery query)
+    public Task<List<Workbook>> HandleAsync(GetWorkbooksQuery query, CancellationToken ct)
     {
-        return repository.GetAllAsync();
+        return repository.GetAllAsync(ct);
     }
 }

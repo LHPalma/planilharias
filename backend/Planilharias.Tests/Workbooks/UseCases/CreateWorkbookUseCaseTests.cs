@@ -1,4 +1,4 @@
-﻿using NSubstitute;
+using NSubstitute;
 using Planilharias.Application.Abstractions;
 using Planilharias.Application.Workbooks.Commands;
 using Planilharias.Application.Workbooks.DTOs.Requests;
@@ -27,16 +27,16 @@ public class CreateWorkbookUseCaseTests
         const string workbookName = "Cavalos do Carlinhos";
         var request = new CreateWorkbookRequest(workbookName);
         var created = Workbook.Create(workbookName);
-        _handler.HandleAsync(Arg.Any<CreateWorkbookCommand>())
+        _handler.HandleAsync(Arg.Any<CreateWorkbookCommand>(), Arg.Any<CancellationToken>())
             .Returns(created);
 
         // Act
-        var result = await _useCaseTests.ExecuteAsync(request);
+        var result = await _useCaseTests.ExecuteAsync(request, CancellationToken.None);
 
         // Assert
         Assert.Equal(created.Id, result.Id);
         Assert.Equal(created.Name, result.Name);
         await _handler.Received(1)
-            .HandleAsync(Arg.Is<CreateWorkbookCommand>(c => c.WorkbookName == request.Name));
+            .HandleAsync(Arg.Is<CreateWorkbookCommand>(c => c.WorkbookName == request.Name), Arg.Any<CancellationToken>());
     }
 }

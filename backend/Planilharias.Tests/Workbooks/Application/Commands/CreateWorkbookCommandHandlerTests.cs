@@ -1,4 +1,4 @@
-﻿using NSubstitute;
+using NSubstitute;
 using Planilharias.Application.Workbooks.Commands;
 using Planilharias.Domain.Workbooks.Models;
 using Planilharias.Domain.Workbooks.Repositories;
@@ -13,7 +13,7 @@ public class CreateWorkbookCommandHandlerTests
     public CreateWorkbookCommandHandlerTests()
     {
         _repository = Substitute.For<IWorkbookRepository>();
-        _repository.AddAsync(Arg.Any<Workbook>())
+        _repository.AddAsync(Arg.Any<Workbook>(), Arg.Any<CancellationToken>())
             .Returns(call => call.Arg<Workbook>());
 
         _handler = new CreateWorkbookCommandHandler(_repository);
@@ -27,11 +27,11 @@ public class CreateWorkbookCommandHandlerTests
         var command = new CreateWorkbookCommand(workbookName);
 
         // Act
-        var result = await _handler.HandleAsync(command);
+        var result = await _handler.HandleAsync(command, CancellationToken.None);
 
         // Assert
         Assert.Equal(workbookName, result.Name);
         await _repository.Received(1)
-            .AddAsync(Arg.Is<Workbook>(w => w.Name == workbookName));
+            .AddAsync(Arg.Is<Workbook>(w => w.Name == workbookName), Arg.Any<CancellationToken>());
     }
 }

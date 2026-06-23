@@ -11,9 +11,9 @@ public class GetWorkbooksUseCase(
     WorkbookMapper mapper
 ) : IGetWorkbooksUseCase
 {
-    public async Task<List<WorkbookResponse>> ExecuteAsync()
+    public async Task<List<WorkbookResponse>> ExecuteAsync(CancellationToken ct)
     {
-        var workbooks = await handler.HandleAsync(new GetWorkbooksQuery());
+        var workbooks = await handler.HandleAsync(new GetWorkbooksQuery(), ct);
         return workbooks.Select(mapper.ToResponse).ToList();
     }
 }

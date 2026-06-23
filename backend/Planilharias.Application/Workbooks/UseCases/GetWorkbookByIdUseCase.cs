@@ -11,9 +11,9 @@ public class GetWorkbookByIdUseCase(
     WorkbookMapper mapper
 ) : IGetWorkbookByIdUseCase
 {
-    public async Task<WorkbookResponse> ExecuteAsync(Guid id)
+    public async Task<WorkbookResponse> ExecuteAsync(Guid id, CancellationToken ct)
     {
-        var workbook = await handler.HandleAsync(new GetWorkbookByIdQuery(id));
+        var workbook = await handler.HandleAsync(new GetWorkbookByIdQuery(id), ct);
         return mapper.ToResponse(workbook);
     }
 }

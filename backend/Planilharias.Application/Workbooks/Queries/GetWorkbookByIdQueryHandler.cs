@@ -8,8 +8,8 @@ public sealed class GetWorkbookByIdQueryHandler(
     IWorkbookRepository repository
 ) : IQueryHandler<GetWorkbookByIdQuery, Workbook>
 {
-    public Task<Workbook> HandleAsync(GetWorkbookByIdQuery query)
+    public Task<Workbook> HandleAsync(GetWorkbookByIdQuery query, CancellationToken ct)
     {
-        return repository.GetByIdAsync(query.Id);
+        return repository.GetByIdAsync(query.Id, ct);
     }
 }

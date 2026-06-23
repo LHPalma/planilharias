@@ -24,15 +24,15 @@ public class GetWorkbookByIdUseCaseTests
         // Arrange
         var id = Guid.NewGuid();
         var workbook = Workbook.Create("Cavalos do Carlinhos");
-        _handler.HandleAsync(Arg.Any<GetWorkbookByIdQuery>()).Returns(workbook);
+        _handler.HandleAsync(Arg.Any<GetWorkbookByIdQuery>(), Arg.Any<CancellationToken>()).Returns(workbook);
 
         // Act
-        var result = await _useCase.ExecuteAsync(id);
+        var result = await _useCase.ExecuteAsync(id, CancellationToken.None);
 
         // Assert
         Assert.Equal(workbook.Id, result.Id);
         Assert.Equal(workbook.Name, result.Name);
         Assert.Equal(workbook.CreatedAt, result.CreatedAt);
-        await _handler.Received(1).HandleAsync(Arg.Is<GetWorkbookByIdQuery>(q => q.Id == id));
+        await _handler.Received(1).HandleAsync(Arg.Is<GetWorkbookByIdQuery>(q => q.Id == id), Arg.Any<CancellationToken>());
     }
 }

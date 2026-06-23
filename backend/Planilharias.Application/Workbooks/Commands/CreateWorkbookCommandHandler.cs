@@ -8,9 +8,9 @@ public sealed class CreateWorkbookCommandHandler(
     IWorkbookRepository repository
 ) : ICommandHandler<CreateWorkbookCommand, Workbook>
 {
-    public async Task<Workbook> HandleAsync(CreateWorkbookCommand command)
+    public async Task<Workbook> HandleAsync(CreateWorkbookCommand command, CancellationToken ct)
     {
         var workbook = Workbook.Create(command.WorkbookName);
-        return await repository.AddAsync(workbook);
+        return await repository.AddAsync(workbook, ct);
     }
 }

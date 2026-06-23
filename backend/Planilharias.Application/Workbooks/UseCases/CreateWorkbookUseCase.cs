@@ -12,9 +12,9 @@ public class CreateWorkbookUseCase(
     WorkbookMapper mapper
 ) : ICreateWorkbookUseCase
 {
-    public async Task<WorkbookResponse> ExecuteAsync(CreateWorkbookRequest request)
+    public async Task<WorkbookResponse> ExecuteAsync(CreateWorkbookRequest request, CancellationToken ct)
     {
-        var workbook = await handler.HandleAsync(new CreateWorkbookCommand(request.Name));
+        var workbook = await handler.HandleAsync(new CreateWorkbookCommand(request.Name), ct);
         return mapper.ToResponse(workbook);
     }
 }
